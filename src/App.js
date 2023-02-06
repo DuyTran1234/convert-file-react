@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { AppContext } from "./app-context/AppContext";
+import HomePage from "./home-page/HomePage";
+import { convertFileTypeList } from "./shared/convertTypeList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [anchorElNav, setAnchorElNav] = React.useState('');
+	const [anchorElUser, setAnchorElUser] = React.useState('');
+	const [convertFileType, setConvertFileType] = React.useState(convertFileTypeList.get(1));
+	const [filesUpload, setFilesUpload] = React.useState(null);
+	const [errorMsg, setErrorMsg] = React.useState(null);
+	const [loading, setLoading] = React.useState(false);
+	const [convertFiles, setConvertFiles] = React.useState(null);
+
+	const stateStorage = {
+		anchorElNav, setAnchorElNav,
+		anchorElUser, setAnchorElUser,
+		convertFileType, setConvertFileType,
+		filesUpload, setFilesUpload,
+		errorMsg, setErrorMsg,
+		loading, setLoading,
+		convertFiles, setConvertFiles,
+	};
+
+	return (
+		<AppContext.Provider value={stateStorage} >
+			<HomePage />
+		</AppContext.Provider>
+	);
 }
 
 export default App;
